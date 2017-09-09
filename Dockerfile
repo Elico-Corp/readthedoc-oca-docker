@@ -8,12 +8,14 @@ RUN pip install -i http://pypi.douban.com/simple -U Sphinx
 RUN apt install -y vim
 RUN mkdir -p /mnt/readthedoc
 RUN sphinx-quickstart -q -p "Elico Corp" -a "Shanghai Elico Limited" --suffix=.rst --master=index --makefile --no-batchfile --ext-autodoc /mnt/readthedoc
-ADD conf.py /mnt/readthedoc/conf.py
-ADD index.rst /mnt/readthedoc/index.rst
-ADD ./logo.png /mnt/readthedoc/logo.png
-ADD ./pull_repos_oca.sh /mnt/readthedoc/pull_repos_oca.sh
-RUN chmod +x /mnt/readthedoc/pull_repos_oca.sh
-RUN /mnt/readthedoc/pull_repos_oca.sh
+RUN mkdir /mnt/readthedoc/source
+ADD source /mnt/readthedoc/source
+ADD ./conf/conf.py /mnt/readthedoc/conf.py
+ADD ./conf/index.rst /mnt/readthedoc/index.rst
+ADD ./conf/logo.png /mnt/readthedoc/logo.png
+ADD ./rtd_oca_build_index.sh /mnt/readthedoc/rtd_oca_build_index.sh
+RUN chmod +x /mnt/readthedoc/rtd_oca_build_index.sh
+RUN /mnt/readthedoc/rtd_oca_build_index.sh
 RUN cd /mnt/readthedoc && make html
 RUN rm -rf /usr/share/nginx/html
 RUN ln -s /mnt/readthedoc/_build/html /usr/share/nginx/html
