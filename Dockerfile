@@ -11,11 +11,12 @@ RUN sphinx-quickstart -q -p "Elico Corp" -a "Shanghai Elico Limited" --suffix=.r
 RUN mkdir /mnt/readthedoc/source
 ADD source /mnt/readthedoc/source
 ADD ./conf/conf.py /mnt/readthedoc/conf.py
-ADD ./conf/index.rst /mnt/readthedoc/index.rst
+ADD ./conf/index.hdr /mnt/readthedoc/index.hdr
+ADD ./conf/index.ftr /mnt/readthedoc/index.ftr
 ADD ./conf/logo.png /mnt/readthedoc/logo.png
-ADD ./rtd_oca_build_index.sh /mnt/readthedoc/rtd_oca_build_index.sh
-RUN chmod +x /mnt/readthedoc/rtd_oca_build_index.sh
-RUN /mnt/readthedoc/rtd_oca_build_index.sh
+ADD ./rtd_build_index.sh /mnt/readthedoc/rtd_build_index.sh
+RUN chmod +x /mnt/readthedoc/rtd_build_index.sh
+RUN /mnt/readthedoc/rtd_build_index.sh
 RUN cd /mnt/readthedoc && make html
 RUN rm -rf /usr/share/nginx/html
 RUN ln -s /mnt/readthedoc/_build/html /usr/share/nginx/html

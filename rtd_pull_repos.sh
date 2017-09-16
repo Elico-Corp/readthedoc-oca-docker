@@ -19,7 +19,6 @@ fi
 doc_dir=$base_dir/source
 repo_file=maintainer-tools/tools/repos_with_ids.txt
 name='maintainer-tools'
-branch='10.0' # FIXME fetch all branches and store all README in separate dir.
 
 cd $doc_dir
 
@@ -35,8 +34,8 @@ do
   echo $log_src[`date +%F.%H:%M:%S`]' Cloning repo '$repo
   name=$(sed "s/github.com\/OCA\///g" <<< $repo)
   echo $id $repo $name
-  [ -d $name ] && cd $name && git pull && git checkout $branch && cd ..
-  [ ! -d $name ] &&  git clone https://$repo.git $name && cd $name && git checkout $branch && cd ..
+  [ -d $name ] && cd $name && git pull && cd ..
+  [ ! -d $name ] &&  git clone https://$repo.git $name
 
 done < $repo_file
 
