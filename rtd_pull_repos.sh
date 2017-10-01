@@ -1,5 +1,5 @@
 #!/bin/bash
-# Usage: rtd_oca_pull_repos.sh base_dir or rtd_oca_pull_repos.sh
+# Usage: rtd_pull_repos.sh base_dir or rtd_pull_repos.sh
 # Just clone or pull the list of repo from the file
 # the script is launched from relative directory
 # doc and source directory must exist
